@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import "./style.css"
 import logo from "../../images/logo.svg"
 import bluedash from "../../images/blue-dash.png"
@@ -12,6 +13,26 @@ import twitter from "../../images/icon-twitter.svg"
 import working from "../../images/illustration-working.svg"
 
 function UI() {
+  const [text, setText] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!text) {
+      alert("Input is Empty")
+    } else {
+      const validLink = async () => {
+        const res = await fetch(`https://api.shrtco.de/v2/shorten?url=${text}`)
+        const data = await res.json()
+
+        if (!(data.ok)) {
+          alert("Please enter a valid URL");
+        }
+
+      }
+
+    }
+  }
   return (
     <div>
       <meta charSet="UTF-8" />
@@ -52,13 +73,15 @@ function UI() {
           </div>
         </div>
         {/* shortner*/}
-        <div className=" w-4/5 rounded-md absolute -bottom-244 left-106 flex flex-row z-10 bg-[#3B3054] items-center p-10 gap-2 justify-around">
-          <div onsubmit="handleSubmit()">
-            <input type="url" placeholder="Shorten a link here.." className="rounded-md  p-3 w-82 " id="input_link" onchange="inputChange()" />
-            <button type="submit" method="post" className="w-10p p-3 rounded-md w-14p bg-cyan-400 text-white" onclick="handleSubmit()" id="submit_btn">Shorten
-              It!</button>
+        <form className="form" onSubmit={handleSubmit()}>
+          <div className=" w-4/5 rounded-md absolute -bottom-244 left-106 flex flex-row z-10 bg-[#3B3054] items-center p-10 gap-2 justify-around">
+            <div onsubmit="handleSubmit()">
+              <input type="url" placeholder="Enter your link here.." className="rounded-md  p-3 w-82 " id="input_link" value={text} onchange={(e) => setText(e.target.value)} />
+              <button type="submit" method="post" className="w-10p p-3 rounded-md w-14p bg-cyan-400 text-white" onClick={handleSubmit} id="submit_btn">Summarize
+                It!</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
       <div className="links_container">
         <div className="error_msg">
