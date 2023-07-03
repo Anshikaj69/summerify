@@ -14,23 +14,23 @@ import working from "../../images/illustration-working.svg"
 
 function UI() {
   const [text, setText] = useState("");
+  const [links, setLinks] = useState([]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!text) {
       alert("Input is Empty")
     } else {
-      const validLink = async () => {
+      const shortenLink = async () => {
         const res = await fetch(`https://api.shrtco.de/v2/shorten?url=${text}`)
         const data = await res.json()
 
-        if (!(data.ok)) {
-          alert("Please enter a valid URL");
-        }
-
+        console.log(data.result)
+        setLinks(data.result)
+        setText("")
       }
-
+      shortenLink()
     }
   }
   return (
@@ -49,7 +49,7 @@ function UI() {
         <div className="hero__section__container mx-20 mt-6 mb-44 gap-8">
           <header>
             <div className="logo">
-              <img src={logo} />
+              <img src={logo} alt='logo' />
             </div>
             <div className="navigation__links">
               <nav>Features</nav>
@@ -68,7 +68,7 @@ function UI() {
               <button className="get-started">Get Started</button>
             </div>
             <div className="hero__section__image">
-              <img src={working} />
+              <img src={working} alt='img' />
             </div>
           </div>
         </div>
@@ -82,6 +82,11 @@ function UI() {
             </div>
           </div>
         </form>
+      </div>
+      <div>
+        <ul>
+
+        </ul>
       </div>
       <div className="links_container">
         <div className="error_msg">
@@ -101,23 +106,23 @@ function UI() {
               <h5 className="font-bold text-xl">Brand Recognition</h5>
               <p className="text-gray-400">Boost your brand recognition with each click. Generic links don't
                 mean a thing. Branded links help instil confidence in your content.</p>
-              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={brand} />
+              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={brand} alt='img' />
               </div>
-              <img className="absolute top-67 -right-66 w-24 h-152" src={bluedash} />
+              <img className="absolute top-67 -right-66 w-24 h-152" src={bluedash} alt='' />
             </div>
             <div className="bg-white rounded-md flex flex-col gap-4 items-start pt-16 pb-9 px-8 text-left relative w-30 mt-10 mb-10">
               <h5 className="font-bold text-xl">Detailed Records</h5>
               <p className="text-gray-400">Gain insights into who is clicking your links. Knowing when and where
                 people engage with your content helps inform better decisions.</p>
-              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={detailed} />
+              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={detailed} alt='img' />
               </div>
-              <img className="absolute top-67 -right-66 w-24 h-152" src={bluedash} />
+              <img className="absolute top-67 -right-66 w-24 h-152" src={bluedash} alt='' />
             </div>
             <div className="bg-white rounded-md flex flex-col gap-4 items-start pt-16 pb-9 px-8 text-left relative w-30 mt-20">
               <h5 className="font-bold text-xl">Fully Customizable</h5>
               <p className="text-gray-400">Improve brand awareness and content discoverability through customizable
                 links, supercharging audience engagement.</p>
-              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={fully} />
+              <div className="absolute -top-8 left-7 rounded-full bg-[#3B3054] p-4"><img src={fully} alt='img' />
               </div>
             </div>
           </div>
@@ -131,7 +136,7 @@ function UI() {
       {/*footer*/}
       <div className="bg-[#232127]">
         <div className="grid grid-cols-6 mx-24 py-10  gap-4">
-          <div><img src={logo} /></div>
+          <div><img src={logo} alt='logo' /></div>
           <div><span> </span></div>
           <div className="flex flex-col">
             <h3 className="mb-3 text-white">Features</h3>
@@ -153,10 +158,10 @@ function UI() {
             <h6>Contact</h6>
           </div>
           <div className="flex flex-row gap-2">
-            <img src={facebook} className="h-5 w-5" />
-            <img src={twitter} className="h-5 w-5" />
-            <img src={pinterest} className="h-5 w-5" />
-            <img src={instagram} className="h-5 w-5" />
+            <img src={facebook} className="h-5 w-5" alt='logo' />
+            <img src={twitter} className="h-5 w-5" alt='logo' />
+            <img src={pinterest} className="h-5 w-5" alt='logo' />
+            <img src={instagram} className="h-5 w-5" alt='logo' />
           </div>
         </div>
       </div>
